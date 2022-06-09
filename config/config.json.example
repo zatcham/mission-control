@@ -1,0 +1,14 @@
+{
+  "site_name": "Mission Control",
+  "site_url": "http://test.com",
+  "links": {
+    "Test1": {
+      "url": "http://google.com",
+      "desc": "test1 description"
+    },
+    "ZM IT": {
+      "url": "http://zm-it.co.uk",
+      "desc": "ZM IT website"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "zatcham/mission_control",
+  "description": "A easy-to-use launchpad for sites",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Zach Matcham",
+      "email": "dev@zm-it.co.uk"
+    }
+  ],
+  "require": {
+    "twig/twig": "^3.4"
+  }
+}
