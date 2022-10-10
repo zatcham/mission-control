@@ -12,19 +12,81 @@
                 </div>
             </div>
 
-            <div class="row align-items-md-stretch">
-                {% for key, value in config.links %}
-                    <div class="col-md-3">
-                        <div class="h-100 p-5 text-white bg-dark rounded-3">
-                            <h2>{{ key }}</h2>
-                            <p>{{ value.desc }}</p>
-                            <a class="btn btn-outline-light" href="{{ value.url }}">Go to {{ key }}</a>
+            {% for gkey, group in config.groups %}
+                <div class="accordion" id="group-{{ gkey }}">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="group{{ gkey }}-h">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#group{{ gkey }}-c" aria-expanded="true" aria-controls="#group{{ gkey }}-c">
+                                {{ group.name }}
+                            </button>
+                        </h2>
+                        <div id="group{{ gkey }}-c" class="accordion-collapse collapse show" aria-labelledby="group{{ key }}-h" data-bs-parent="#group-{{ key }}">
+                            <div class="accordion-body">
+                                <div class="row row-cols-1 row-cols-md-3 g-4">
+                                {% for key, value in config.links %}
+                                    {% if value.group == gkey %}
+                                    <div class="col">
+                                        <div class="card h-100 p-3 text-white bg-dark rounded-3">
+                                            <div class="card-body">
+                                                <h2 class="card-title">{{ key }}</h2>
+                                                <p class="card-text">{{ value.desc }}</p>
+                                                <div class="align-bottom">
+                                                    <a class="btn btn-outline-light" href="{{ value.url }}">Go to {{ key }}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                {% endfor %}
+                                </div>
+                            </div>
                         </div>
                     </div>
+                </div>
+            {% endfor %}
 
-                {% endfor %}
+            {# Check if any items have no group #}
+            {% set nogroup = 0 %}
+            {% for key, value in config.links %}
+                {% if value.group is not defined %}
+                    {% set nogroup = nogroup + 1 %}
+                {% endif %}
+            {% endfor %}
+            {% if nogroup >= 1 %}
+            {% endif %}
 
+            <div class="accordion" id="unassigned-group">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="unassigned-h">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#unassigned-c" aria-expanded="true" aria-controls="#unassigned-c">
+                            Unassigned
+                        </button>
+                    </h2>
+                    <div id="unassigned-c" class="accordion-collapse collapse show" aria-labelledby="unassigned-h" data-bs-parent="#unassigned-group">
+                        <div class="accordion-body">
+                            <div class="row row-cols-1 row-cols-md-3 g-4">
+                                {% for key, value in config.links %}
+                                    {% if value.group is not defined %}
+                                        <div class="col">
+                                            <div class="card h-100 p-3 text-white bg-dark rounded-3">
+                                                <div class="card-body">
+                                                    <h2 class="card-title">{{ key }}</h2>
+                                                    <p class="card-text">{{ value.desc }}</p>
+                                                    <div class="align-bottom">
+                                                        <a class="btn btn-outline-light" href="{{ value.url }}">Go to {{ key }}</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
+
 
     </main>
 

@@ -1,14 +1,24 @@
 {
   "site_name": "Mission Control",
   "site_url": "http://test.com",
+  "groups": {
+    "1":{
+        "name": "Test"
+    },
+    "2": {
+        "name": "Test 2"
+    }
+  },
   "links": {
     "Test1": {
       "url": "http://google.com",
-      "desc": "test1 description"
+      "desc": "test1 description",
+      "group": "1"
     },
     "ZM IT": {
       "url": "http://zm-it.co.uk",
-      "desc": "ZM IT website"
+      "desc": "ZM IT website",
+      "group": "2"
     }
   }
 }
